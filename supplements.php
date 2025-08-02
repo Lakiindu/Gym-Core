@@ -106,46 +106,69 @@
     </div>
   </main>
 
-  <!-- Footer -->
-  <footer class="bg-gray-900 text-gray-400 pt-16 pb-10 border-t border-gray-700">
-    <div class="max-w-7xl mx-auto px-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-10 border-b border-gray-700 pb-12">
-      <div class="pr-4 border-r border-gray-700">
-        <h3 class="text-white text-2xl font-extrabold mb-4 tracking-wide">GYM CORE</h3>
-        <p>Your ultimate online fitness hub for training, transformation, and supplements.</p>
-        <div class="flex items-center space-x-3 mt-5">
-          <a href="#" class="w-9 h-9 flex items-center justify-center bg-gray-700 hover:bg-primary rounded-full transition"><i class="fab fa-facebook-f"></i></a>
-          <a href="#" class="w-9 h-9 flex items-center justify-center bg-gray-700 hover:bg-primary rounded-full transition"><i class="fab fa-instagram"></i></a>
-          <a href="#" class="w-9 h-9 flex items-center justify-center bg-gray-700 hover:bg-primary rounded-full transition"><i class="fab fa-twitter"></i></a>
-          <a href="#" class="w-9 h-9 flex items-center justify-center bg-gray-700 hover:bg-primary rounded-full transition"><i class="fab fa-youtube"></i></a>
-        </div>
-      </div>
-      <div class="sm:pl-4 sm:border-r border-gray-700">
-        <h4 class="text-white font-semibold text-lg mb-4">Quick Links</h4>
-        <ul class="space-y-3 text-sm">
-          <li><a href="index.php" class="hover:text-white">🏠 Home</a></li>
-          <li><a href="about.php" class="hover:text-white">👥 About Us</a></li>
-          <li><a href="supplements.php" class="hover:text-white">💊 Supplements</a></li>
-          <li><a href="contact.php" class="hover:text-white">📞 Contact</a></li>
-        </ul>
-      </div>
-      <div class="sm:pl-4 sm:border-r border-gray-700">
-        <h4 class="text-white font-semibold text-lg mb-4">Contact Us</h4>
-        <ul class="space-y-3 text-sm">
-          <li><i class="fas fa-envelope text-primary mr-2"></i> support@gymcore.com</li>
-          <li><i class="fas fa-phone-alt text-primary mr-2"></i> +123-456-7890</li>
-          <li><i class="fas fa-map-marker-alt text-primary mr-2"></i> Colombo, Sri Lanka</li>
-        </ul>
-      </div>
-      <div class="sm:pl-4">
-        <h4 class="text-white font-semibold text-lg mb-4">Subscribe</h4>
-        <form class="flex flex-col space-y-3">
-          <input type="email" placeholder="Enter your email" class="px-4 py-2 rounded bg-gray-800 border border-gray-700 text-white" />
-          <button type="submit" class="bg-primary hover:bg-primary/90 text-white py-2 rounded font-bold">Subscribe</button>
-        </form>
+ <!-- Footer -->
+<footer class="bg-[#1f1f1f] text-gray-300 pt-16 pb-10 border-t-4 border-primary mt-16">
+  <div class="max-w-7xl mx-auto px-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-10 border-b border-gray-700 pb-12">
+
+    <!-- Brand Info -->
+    <div class="pr-4 border-r border-gray-700">
+      <h3 class="text-white text-2xl font-extrabold mb-4 tracking-wide">GYM CORE</h3>
+      <p class="text-sm leading-relaxed">Your ultimate online fitness hub for training, transformation, and supplements.</p>
+      <div class="flex items-center space-x-3 mt-5">
+        <a href="https://www.facebook.com/share/1DqCn5Ubdz/" target="_blank" class="w-9 h-9 flex items-center justify-center bg-gray-700 hover:bg-blue-600 text-white rounded-full transition">
+          <i class="fab fa-facebook-f"></i>
+        </a>
+        <a href="https://www.instagram.com/_.lakiyaaa?igsh=MXA5MGs5ZXJsaHFiaQ==" target="_blank" class="w-9 h-9 flex items-center justify-center bg-gray-700 hover:bg-pink-500 text-white rounded-full transition">
+          <i class="fab fa-instagram"></i>
+        </a>
+        <a href="https://wa.me/qr/5KU4P7OCDNLDG1" target="_blank" class="w-9 h-9 flex items-center justify-center bg-gray-700 hover:bg-green-500 text-white rounded-full transition">
+          <i class="fab fa-whatsapp"></i>
+        </a>
+        <a href="https://www.youtube.com/@LakinduRansika-sw2mc" target="_blank" class="w-9 h-9 flex items-center justify-center bg-gray-700 hover:bg-red-600 text-white rounded-full transition">
+          <i class="fab fa-youtube"></i>
+        </a>
       </div>
     </div>
-    <div class="text-center text-sm text-gray-500 pt-6">&copy; <?php echo date('Y'); ?> GYM CORE. All rights reserved.</div>
-  </footer>
+
+    <!-- Quick Links -->
+    <div class="sm:pl-4 sm:border-r border-gray-700">
+      <h4 class="text-white font-semibold text-lg mb-4 tracking-wider">Quick Links</h4>
+      <ul class="space-y-3 text-sm">
+        <li><a href="index.php" class="hover:text-white transition">🏠 Home</a></li>
+        <li><a href="about.php" class="hover:text-white transition">👥 About Us</a></li>
+        <li><a href="supplements.php" class="hover:text-white transition">💊 Supplements</a></li>
+        <li><a href="contact.php" class="hover:text-white transition">📞 Contact</a></li>
+      </ul>
+    </div>
+
+    <!-- Contact Info -->
+    <div class="sm:pl-4 sm:border-r border-gray-700">
+      <h4 class="text-white font-semibold text-lg mb-4 tracking-wider">Contact Us</h4>
+      <ul class="space-y-3 text-sm">
+        <li><i class="fas fa-envelope text-primary mr-2"></i> support@gymcore.com</li>
+        <li><i class="fas fa-phone-alt text-primary mr-2"></i> 076-561-4545</li>
+        <li><i class="fas fa-map-marker-alt text-primary mr-2"></i> Colombo, Sri Lanka</li>
+      </ul>
+    </div>
+
+    <!-- Newsletter -->
+    <div class="sm:pl-4">
+      <h4 class="text-white font-semibold text-lg mb-4 tracking-wider">Subscribe to Newsletter</h4>
+      <p class="text-sm mb-4">Get the latest updates, deals, and fitness tips in your inbox.</p>
+      <form action="subscribe.php" method="get" class="flex flex-col space-y-3">
+        <button type="submit"
+          class="bg-primary hover:bg-primary/90 text-white py-2 rounded font-bold transition">
+          Subscribe
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Bottom Note with only top border -->
+  <div class="text-center text-sm text-gray-500 pt-6 border-t-4 border-primary mt-6">
+    &copy; <?php echo date("Y"); ?> GYM Core. All rights reserved.
+  </div>
+</footer>
 
   <!-- Scripts -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>

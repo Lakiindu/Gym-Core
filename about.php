@@ -39,14 +39,15 @@
   <header class="bg-gray-800 fixed w-full top-0 z-50 shadow">
     <div class="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
       <a href="index.php" class="flex items-center">
-  <span class="text-3xl font-bold text-primary">GYM CORE</span>
-  <i class="fas fa-dumbbell ml-2 text-white text-xl"></i>
-</a>
+        <span class="text-3xl font-bold text-primary">GYM CORE</span>
+        <i class="fas fa-dumbbell ml-2 text-white text-xl"></i>
+      </a>
 
       <nav class="hidden md:flex space-x-6 text-sm uppercase tracking-wide">
         <a href="index.php" class="hover:text-primary">Home</a>
         <a href="about.php" class="text-primary">About Us</a>
         <a href="supplements.php" class="hover:text-primary">Supplements</a>
+        <a href="instructors.php" class="hover:text-primary">Instructors</a>
         <a href="contact.php" class="hover:text-primary">Contact</a>
       </nav>
       <div class="flex items-center space-x-3">
@@ -55,10 +56,6 @@
         <button id="menu-toggle" class="md:hidden text-white text-xl focus:outline-none">
           <i class="fas fa-bars"></i>
         </button>
-        <button id="mode-toggle" class="focus:outline-none text-xl">
-          <i class="fas fa-sun hidden"></i>
-          <i class="fas fa-moon"></i>
-        </button>
       </div>
     </div>
     <div id="mobile-menu" class="hidden bg-gray-800 md:hidden">
@@ -66,6 +63,7 @@
         <a href="index.php" class="hover:text-primary">Home</a>
         <a href="about.php" class="text-primary">About Us</a>
         <a href="supplements.php" class="hover:text-primary">Supplements</a>
+        <a href="instructors.php" class="hover:text-primary">Instructors</a>
         <a href="contact.php" class="hover:text-primary">Contact</a>
         <a href="login.php" class="px-4 py-2 border border-primary text-primary rounded w-5/6 text-center">Login</a>
         <a href="register.php" class="px-4 py-2 bg-primary text-white rounded w-5/6 text-center">Register</a>
@@ -74,7 +72,7 @@
   </header>
 
   <!-- Hero Section -->
-  <section class="relative h-[60vh] bg-cover bg-center flex items-center justify-center px-6" style="background-image: url('about us.jpg'); margin-top: 64px;">
+  <section class="relative h-[60vh] bg-cover bg-center flex items-center justify-center px-6" style="background-image: url('images/About/about us.jpg'); margin-top: 64px;">
     <div class="bg-black/70 p-10 md:p-16 rounded-xl text-center animate-fadeIn">
       <h1 class="text-4xl md:text-6xl font-extrabold">ABOUT <span class="text-primary">US</span></h1>
       <p class="mt-4 text-gray-300 max-w-2xl mx-auto">We are dedicated to helping you achieve your fitness goals with personalized training, premium supplements, and expert support.</p>
@@ -112,109 +110,121 @@
   <!-- Meet the Team -->
   <section class="py-16 bg-gray-900">
     <div class="max-w-6xl mx-auto px-4 text-center">
-      <h2 class="text-3xl font-bold mb-8">Meet Our Team</h2>
+      <h2 class="text-3xl font-bold mb-8 text-white" data-aos="fade-down" data-aos-duration="1000">Meet Our Team</h2>
       <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-        <div class="bg-gray-800 p-6 rounded-lg shadow text-center">
-          <img src="images/instructor2.jpg" class="rounded-full mx-auto mb-4" alt="Trainer" />
-          <h4 class="text-xl font-semibold">Coach Alex</h4>
+        <div 
+          class="bg-gray-800 p-6 rounded-lg shadow text-center transform transition-transform duration-300 hover:scale-105 cursor-pointer"
+          data-aos="fade-up" data-aos-delay="100" data-aos-duration="800"
+        >
+          <img 
+            src="images/Instructors/instructor1.jpg" 
+            class="rounded-full mx-auto mb-4 transition-transform duration-500 ease-in-out hover:scale-110 hover:shadow-lg hover:shadow-primary/60 cursor-pointer" 
+            alt="Trainer" 
+            loading="lazy"
+          />
+          <h4 class="text-xl font-semibold text-white">Coach Alex</h4>
           <p class="text-gray-400 text-sm">Head Trainer</p>
         </div>
-        <div class="bg-gray-800 p-6 rounded-lg shadow text-center">
-          <img src="images/instructor2.jpg" class="rounded-full mx-auto mb-4" alt="Admin" />
-          <h4 class="text-xl font-semibold">Sarah Kim</h4>
+        <div 
+          class="bg-gray-800 p-6 rounded-lg shadow text-center transform transition-transform duration-300 hover:scale-105 cursor-pointer"
+          data-aos="fade-up" data-aos-delay="200" data-aos-duration="800"
+        >
+          <img 
+            src="images/Instructors/instructor2.jpg" 
+            class="rounded-full mx-auto mb-4 transition-transform duration-500 ease-in-out hover:scale-110 hover:shadow-lg hover:shadow-primary/60 cursor-pointer" 
+            alt="Admin" 
+            loading="lazy"
+          />
+          <h4 class="text-xl font-semibold text-white">Sarah Kim</h4>
           <p class="text-gray-400 text-sm">Admin Coordinator</p>
         </div>
-        <div class="bg-gray-800 p-6 rounded-lg shadow text-center">
-          <img src="images/instructor2.jpg" class="rounded-full mx-auto mb-4" alt="Nutritionist" />
-          <h4 class="text-xl font-semibold">Mike Lee</h4>
+        <div 
+          class="bg-gray-800 p-6 rounded-lg shadow text-center transform transition-transform duration-300 hover:scale-105 cursor-pointer"
+          data-aos="fade-up" data-aos-delay="300" data-aos-duration="800"
+        >
+          <img 
+            src="images/Instructors/instructor3.jpg" 
+            class="rounded-full mx-auto mb-4 transition-transform duration-500 ease-in-out hover:scale-110 hover:shadow-lg hover:shadow-primary/60 cursor-pointer" 
+            alt="Nutritionist" 
+            loading="lazy"
+          />
+          <h4 class="text-xl font-semibold text-white">Mike Lee</h4>
           <p class="text-gray-400 text-sm">Nutrition Expert</p>
         </div>
       </div>
     </div>
   </section>
 
-<!-- Footer -->
-<footer class="bg-[#1f1f1f] text-gray-300 pt-16 pb-10 border-t-4 border-primary mt-16">
-  <div class="max-w-7xl mx-auto px-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-10 border-b border-gray-700 pb-12">
+  <!-- Footer -->
+  <footer class="bg-[#1f1f1f] text-gray-300 pt-16 pb-10 border-t-4 border-primary mt-16">
+    <div class="max-w-7xl mx-auto px-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-10 border-b border-gray-700 pb-12">
 
-    <!-- Brand Info -->
-    <div class="pr-4 border-r border-gray-700">
-      <h3 class="text-white text-2xl font-extrabold mb-4 tracking-wide">GYM CORE</h3>
-      <p class="text-sm leading-relaxed">Your ultimate online fitness hub for training, transformation, and supplements.</p>
-      <div class="flex items-center space-x-3 mt-5">
-        <a href="https://www.facebook.com/share/1DqCn5Ubdz/" target="_blank" class="w-9 h-9 flex items-center justify-center bg-gray-700 hover:bg-blue-600 text-white rounded-full transition">
-          <i class="fab fa-facebook-f"></i>
-        </a>
-        <a href="https://www.instagram.com/_.lakiyaaa?igsh=MXA5MGs5ZXJsaHFiaQ==" target="_blank" class="w-9 h-9 flex items-center justify-center bg-gray-700 hover:bg-pink-500 text-white rounded-full transition">
-          <i class="fab fa-instagram"></i>
-        </a>
-        <a href="https://wa.me/qr/5KU4P7OCDNLDG1" target="_blank" class="w-9 h-9 flex items-center justify-center bg-gray-700 hover:bg-green-500 text-white rounded-full transition">
-          <i class="fab fa-whatsapp"></i>
-        </a>
-        <a href="https://www.youtube.com/@LakinduRansika-sw2mc" target="_blank" class="w-9 h-9 flex items-center justify-center bg-gray-700 hover:bg-red-600 text-white rounded-full transition">
-          <i class="fab fa-youtube"></i>
-        </a>
+      <!-- Brand Info -->
+      <div class="pr-4 border-r border-gray-700">
+        <h3 class="text-white text-2xl font-extrabold mb-4 tracking-wide">GYM CORE</h3>
+        <p class="text-sm leading-relaxed">Your ultimate online fitness hub for training, transformation, and supplements.</p>
+        <div class="flex items-center space-x-3 mt-5">
+          <a href="https://www.facebook.com/share/1DqCn5Ubdz/" target="_blank" class="w-9 h-9 flex items-center justify-center bg-gray-700 hover:bg-blue-600 text-white rounded-full transition">
+            <i class="fab fa-facebook-f"></i>
+          </a>
+          <a href="https://www.instagram.com/_.lakiyaaa?igsh=MXA5MGs5ZXJsaHFiaQ==" target="_blank" class="w-9 h-9 flex items-center justify-center bg-gray-700 hover:bg-pink-500 text-white rounded-full transition">
+            <i class="fab fa-instagram"></i>
+          </a>
+          <a href="https://wa.me/qr/5KU4P7OCDNLDG1" target="_blank" class="w-9 h-9 flex items-center justify-center bg-gray-700 hover:bg-green-500 text-white rounded-full transition">
+            <i class="fab fa-whatsapp"></i>
+          </a>
+          <a href="https://www.youtube.com/@LakinduRansika-sw2mc" target="_blank" class="w-9 h-9 flex items-center justify-center bg-gray-700 hover:bg-red-600 text-white rounded-full transition">
+            <i class="fab fa-youtube"></i>
+          </a>
+        </div>
+      </div>
+
+      <!-- Quick Links -->
+      <div class="sm:pl-4 sm:border-r border-gray-700">
+        <h4 class="text-white font-semibold text-lg mb-4 tracking-wider">Quick Links</h4>
+        <ul class="space-y-3 text-sm">
+          <li><a href="index.php" class="hover:text-white transition">🏠 Home</a></li>
+          <li><a href="about.php" class="hover:text-white transition">👥 About Us</a></li>
+          <li><a href="supplements.php" class="hover:text-white transition">💊 Supplements</a></li>
+          <li><a href="instructors.php" class="hover:text-white transition">🏋️‍♂️ Instructors</a></li>
+          <li><a href="contact.php" class="hover:text-white transition">📞 Contact</a></li>
+        </ul>
+      </div>
+
+      <!-- Contact Info -->
+      <div class="sm:pl-4 sm:border-r border-gray-700">
+        <h4 class="text-white font-semibold text-lg mb-4 tracking-wider">Contact Us</h4>
+        <ul class="space-y-3 text-sm">
+          <li><i class="fas fa-envelope text-primary mr-2"></i> support@gymcore.com</li>
+          <li><i class="fas fa-phone-alt text-primary mr-2"></i> 076-561-4545</li>
+          <li><i class="fas fa-map-marker-alt text-primary mr-2"></i> Colombo, Sri Lanka</li>
+        </ul>
+      </div>
+
+      <!-- Newsletter -->
+      <div class="sm:pl-4">
+        <h4 class="text-white font-semibold text-lg mb-4 tracking-wider">Subscribe to Newsletter</h4>
+        <p class="text-sm mb-4">Get the latest updates, deals, and fitness tips in your inbox.</p>
+        <form action="subscribe.php" method="get" class="flex flex-col space-y-3">
+          <button type="submit"
+            class="bg-primary hover:bg-primary/90 text-white py-2 rounded font-bold transition">
+            Subscribe
+          </button>
+        </form>
       </div>
     </div>
 
-    <!-- Quick Links -->
-    <div class="sm:pl-4 sm:border-r border-gray-700">
-      <h4 class="text-white font-semibold text-lg mb-4 tracking-wider">Quick Links</h4>
-      <ul class="space-y-3 text-sm">
-        <li><a href="index.php" class="hover:text-white transition">🏠 Home</a></li>
-        <li><a href="about.php" class="hover:text-white transition">👥 About Us</a></li>
-        <li><a href="supplements.php" class="hover:text-white transition">💊 Supplements</a></li>
-        <li><a href="contact.php" class="hover:text-white transition">📞 Contact</a></li>
-      </ul>
+    <!-- Bottom Note with only top border -->
+    <div class="text-center text-sm text-gray-500 pt-6 border-t-4 border-primary mt-6">
+      &copy; <?php echo date("Y"); ?> GYM Core. All rights reserved.
     </div>
-
-    <!-- Contact Info -->
-    <div class="sm:pl-4 sm:border-r border-gray-700">
-      <h4 class="text-white font-semibold text-lg mb-4 tracking-wider">Contact Us</h4>
-      <ul class="space-y-3 text-sm">
-        <li><i class="fas fa-envelope text-primary mr-2"></i> support@gymcore.com</li>
-        <li><i class="fas fa-phone-alt text-primary mr-2"></i> 076-561-4545</li>
-        <li><i class="fas fa-map-marker-alt text-primary mr-2"></i> Colombo, Sri Lanka</li>
-      </ul>
-    </div>
-
-    <!-- Newsletter -->
-    <div class="sm:pl-4">
-      <h4 class="text-white font-semibold text-lg mb-4 tracking-wider">Subscribe to Newsletter</h4>
-      <p class="text-sm mb-4">Get the latest updates, deals, and fitness tips in your inbox.</p>
-      <form action="subscribe.php" method="get" class="flex flex-col space-y-3">
-        <button type="submit"
-          class="bg-primary hover:bg-primary/90 text-white py-2 rounded font-bold transition">
-          Subscribe
-        </button>
-      </form>
-    </div>
-  </div>
-
-  <!-- Bottom Note with only top border -->
-  <div class="text-center text-sm text-gray-500 pt-6 border-t-4 border-primary mt-6">
-    &copy; <?php echo date("Y"); ?> GYM Core. All rights reserved.
-  </div>
-</footer>
+  </footer>
 
   <!-- JS -->
   <script>
     document.getElementById("menu-toggle").addEventListener("click", () => {
       const menu = document.getElementById("mobile-menu");
       menu.classList.toggle("hidden");
-    });
-
-    const modeToggle = document.getElementById("mode-toggle");
-    modeToggle.addEventListener("click", () => {
-      document.body.classList.toggle("bg-gray-900");
-      document.body.classList.toggle("bg-gray-100");
-      document.body.classList.toggle("text-white");
-      document.body.classList.toggle("text-gray-900");
-
-      const sunIcon = modeToggle.querySelector(".fa-sun");
-      const moonIcon = modeToggle.querySelector(".fa-moon");
-      sunIcon.classList.toggle("hidden");
-      moonIcon.classList.toggle("hidden");
     });
 
     AOS.init({

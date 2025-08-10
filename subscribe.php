@@ -136,6 +136,7 @@ session_start();
         <li><a href="index.php" class="hover:text-white transition">🏠 Home</a></li>
         <li><a href="about.php" class="hover:text-white transition">👥 About Us</a></li>
         <li><a href="supplements.php" class="hover:text-white transition">💊 Supplements</a></li>
+        <li><a href="instructors.php" class="hover:text-white transition">🏋️‍♂️ Instructors</a></li>
         <li><a href="contact.php" class="hover:text-white transition">📞 Contact</a></li>
       </ul>
     </div>

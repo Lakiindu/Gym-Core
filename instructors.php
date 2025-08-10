@@ -16,24 +16,10 @@
       }
     };
   </script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" />
   <script defer>
     document.addEventListener("DOMContentLoaded", () => {
-      const modeToggle = document.getElementById("mode-toggle");
-      const body = document.body;
-      const moonIcon = modeToggle.querySelector(".fa-moon");
-      const sunIcon = modeToggle.querySelector(".fa-sun");
-
-      modeToggle.addEventListener("click", () => {
-        body.classList.toggle("bg-white");
-        body.classList.toggle("text-gray-900");
-        body.classList.toggle("bg-gray-900");
-        body.classList.toggle("text-white");
-        moonIcon.classList.toggle("hidden");
-        sunIcon.classList.toggle("hidden");
-      });
-
       document.getElementById("menu-toggle").addEventListener("click", () => {
         document.getElementById("mobile-menu").classList.toggle("hidden");
       });
@@ -52,15 +38,13 @@
       <a href="index.php" class="hover:text-primary">Home</a>
       <a href="about.php" class="hover:text-primary">About Us</a>
       <a href="supplements.php" class="hover:text-primary">Supplements</a>
+      <a href="instructors.php" class="text-primary font-bold" aria-current="page">Instructors</a>
       <a href="contact.php" class="hover:text-primary">Contact</a>
     </nav>
     <div class="flex items-center space-x-3">
       <a href="login.php" class="hidden md:inline-block text-sm px-4 py-2 border border-primary text-primary rounded hover:bg-primary hover:text-white transition">Login</a>
       <a href="register.php" class="hidden md:inline-block text-sm px-4 py-2 bg-primary text-white rounded hover:bg-primary/90 transition">Register</a>
       <button id="menu-toggle" class="md:hidden text-white text-xl focus:outline-none"><i class="fas fa-bars"></i></button>
-      <button id="mode-toggle" class="focus:outline-none text-xl">
-        <i class="fas fa-sun hidden"></i><i class="fas fa-moon"></i>
-      </button>
     </div>
   </div>
   <div id="mobile-menu" class="hidden bg-gray-800 md:hidden">
@@ -68,6 +52,7 @@
       <a href="index.php" class="text-primary hover:text-white">Home</a>
       <a href="about.php" class="hover:text-primary">About Us</a>
       <a href="supplements.php" class="hover:text-primary">Supplements</a>
+      <a href="instructors.php" class="text-primary font-bold" aria-current="page">Instructors</a>
       <a href="contact.php" class="hover:text-primary">Contact</a>
       <a href="login.php" class="px-4 py-2 border border-primary text-primary rounded w-5/6 text-center">Login</a>
       <a href="register.php" class="px-4 py-2 bg-primary text-white rounded w-5/6 text-center">Register</a>
@@ -90,8 +75,8 @@
     <!-- Instructor Card 1 -->
     <div class="bg-gray-800 rounded-3xl overflow-hidden shadow-xl hover:shadow-2xl transition-all transform hover:-translate-y-1 group" data-aos="zoom-in">
       <div class="w-full aspect-w-1 aspect-h-1 overflow-hidden">
-        <img src="images/instructor1.jpg" alt="Alex Johnson"
-             class="object-cover w-full h-full transition-transform duration-500 ease-in-out transform group-hover:scale-105 group-hover:brightness-110">
+        <img src="images/Instructors/instructor1.jpg" alt="Alex Johnson"
+             class="object-cover w-full h-full transition-transform duration-500 ease-in-out transform group-hover:scale-105 group-hover:brightness-110" />
       </div>
       <div class="p-6 text-center">
         <h3 class="text-2xl font-bold text-primary mb-1">Alex Johnson</h3>
@@ -103,8 +88,8 @@
     <!-- Instructor Card 2 -->
     <div class="bg-gray-800 rounded-3xl overflow-hidden shadow-xl hover:shadow-2xl transition-all transform hover:-translate-y-1 group" data-aos="zoom-in" data-aos-delay="100">
       <div class="w-full aspect-w-1 aspect-h-1 overflow-hidden">
-        <img src="images/instructor2.jpg" alt="Emily Carter"
-             class="object-cover w-full h-full transition-transform duration-500 ease-in-out transform group-hover:scale-105 group-hover:brightness-110">
+        <img src="images/Instructors/instructor2.jpg" alt="Emily Carter"
+             class="object-cover w-full h-full transition-transform duration-500 ease-in-out transform group-hover:scale-105 group-hover:brightness-110" />
       </div>
       <div class="p-6 text-center">
         <h3 class="text-2xl font-bold text-primary mb-1">Emily Carter</h3>
@@ -116,8 +101,8 @@
     <!-- Instructor Card 3 -->
     <div class="bg-gray-800 rounded-3xl overflow-hidden shadow-xl hover:shadow-2xl transition-all transform hover:-translate-y-1 group" data-aos="zoom-in" data-aos-delay="200">
       <div class="w-full aspect-w-1 aspect-h-1 overflow-hidden">
-        <img src="images/instructor3.jpg" alt="Marcus Lee"
-             class="object-cover w-full h-full transition-transform duration-500 ease-in-out transform group-hover:scale-105 group-hover:brightness-110">
+        <img src="images/Instructors/instructor3.jpg" alt="Marcus Lee"
+             class="object-cover w-full h-full transition-transform duration-500 ease-in-out transform group-hover:scale-105 group-hover:brightness-110" />
       </div>
       <div class="p-6 text-center">
         <h3 class="text-2xl font-bold text-primary mb-1">Marcus Lee</h3>
@@ -130,7 +115,7 @@
     <div class="bg-gray-800 rounded-3xl overflow-hidden shadow-xl hover:shadow-2xl transition-all transform hover:-translate-y-1 group" data-aos="zoom-in" data-aos-delay="200">
       <div class="w-full aspect-w-1 aspect-h-1 overflow-hidden">
         <img src="images/instructor2.jpg" alt="Marcus Lee"
-             class="object-cover w-full h-full transition-transform duration-500 ease-in-out transform group-hover:scale-105 group-hover:brightness-110">
+             class="object-cover w-full h-full transition-transform duration-500 ease-in-out transform group-hover:scale-105 group-hover:brightness-110" />
       </div>
       <div class="p-6 text-center">
         <h3 class="text-2xl font-bold text-primary mb-1">Lakindu Ransika</h3>
@@ -139,23 +124,8 @@
       </div>
     </div>
 
-
   </div>
 </section>
-
-
-    <!-- Instructor 4 (optional, add more if needed) -->
-    <!--
-    <div class="bg-gray-800 rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition duration-300 transform hover:-translate-y-1" data-aos="fade-up" data-aos-delay="300">
-      <img src="images/instructor4.jpg" alt="Instructor Name" class="w-full h-64 object-cover">
-      <div class="p-6">
-        <h3 class="text-2xl font-semibold mb-2 text-primary">Name Here</h3>
-        <p class="text-gray-400 mb-4">Role</p>
-        <p class="text-gray-300 text-sm">Short description.</p>
-      </div>
-    </div>
-    -->
-
 
 <!-- Footer -->
 <footer class="bg-[#1f1f1f] text-gray-300 pt-16 pb-10 border-t-4 border-primary mt-16">
@@ -188,6 +158,7 @@
         <li><a href="index.php" class="hover:text-white transition">🏠 Home</a></li>
         <li><a href="about.php" class="hover:text-white transition">👥 About Us</a></li>
         <li><a href="supplements.php" class="hover:text-white transition">💊 Supplements</a></li>
+        <li><a href="instructors.php" class="hover:text-white transition">🏋️‍♂️ Instructors</a></li>
         <li><a href="contact.php" class="hover:text-white transition">📞 Contact</a></li>
       </ul>
     </div>
@@ -227,4 +198,3 @@
 </script>
 </body>
 </html>
-

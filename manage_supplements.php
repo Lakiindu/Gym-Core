@@ -129,7 +129,9 @@ $supplements = $stmt->fetchAll(PDO::FETCH_ASSOC);
               </td>
               <td class="py-2 px-4"><?php echo htmlspecialchars($supp['name']); ?></td>
               <td class="py-2 px-4"><?php echo htmlspecialchars($supp['stock']); ?></td>
-              <td class="py-2 px-4">$<?php echo htmlspecialchars($supp['price']); ?></td>
+              <td class="py-2 px-4 text-orange-500 font-semibold">
+                <?php echo "Rs. " . number_format((float)$supp['price'], 0, '', ''); ?>
+              </td>
               <td class="py-2 px-4 space-x-2">
                 <button onclick='editSupplement(<?php echo json_encode($supp); ?>)' class="bg-yellow-400 text-white px-3 py-1 rounded hover:bg-yellow-500">Edit</button>
                 <a href="?delete_id=<?php echo $supp['id']; ?>" onclick="return confirm('Delete this supplement?')" class="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600">Delete</a>

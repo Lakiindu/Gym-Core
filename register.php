@@ -1,3 +1,12 @@
+<?php
+session_start();
+
+$errorMsg = "";
+if (isset($_SESSION['register_error'])) {
+    $errorMsg = $_SESSION['register_error'];
+    unset($_SESSION['register_error']);
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -47,9 +56,6 @@
       <div class="flex items-center gap-3">
         <a href="login.php" class="hidden md:inline-block text-sm px-4 py-2 border border-primary text-primary rounded hover:bg-primary hover:text-white">Login</a>
         <a href="register.php" class="hidden md:inline-block text-sm px-4 py-2 bg-primary text-white rounded hover:bg-primary/90">Register</a>
-
-        <!-- Removed theme toggle button -->
-
         <button id="menu-toggle" class="md:hidden text-white text-xl focus:outline-none"><i class="fas fa-bars"></i></button>
       </div>
     </div>
@@ -72,6 +78,14 @@
 
     <section class="relative z-10 backdrop-blur-md bg-gray-800/80 p-8 rounded-2xl shadow-2xl max-w-md w-full animate-fadeInUp">
       <h2 class="text-3xl font-extrabold mb-6 text-center text-primary tracking-wide">Create Your Account</h2>
+
+      <!-- Error Message -->
+      <?php if ($errorMsg): ?>
+        <div class="mb-4 p-3 bg-red-600 text-white rounded text-center font-semibold">
+          <?= htmlspecialchars($errorMsg) ?>
+        </div>
+      <?php endif; ?>
+
       <form action="register_process.php" method="POST" class="space-y-5">
         <div>
           <label for="username" class="block mb-1 font-medium">Username</label>

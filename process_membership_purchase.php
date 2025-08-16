@@ -6,96 +6,68 @@ if (!isset($_SESSION['user_id']) || !isset($_SESSION['role']) || $_SESSION['role
     exit;
 }
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['membership_id'])) {
-    $membershipId = intval($_POST['membership_id']);
-
-    $host = "localhost";
-    $dbname = "gym_db";
-    $user = "postgres";
-    $password = "lakindu";
-
-    try {
-        $conn = new PDO("pgsql:host=$host;dbname=$dbname", $user, $password);
-        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-        $userId = $_SESSION['user_id'];
-
-        // Fetch selected membership plan
-        $stmt = $conn->prepare("SELECT plan_name, duration_days FROM buy_membership WHERE id = :id AND is_active = TRUE");
-        $stmt->execute(['id' => $membershipId]);
-        $selectedPlan = $stmt->fetch(PDO::FETCH_ASSOC);
-
-        if (!$selectedPlan) {
-            $_SESSION['error_message'] = "Invalid membership selected.";
-            header("Location: buy_membership.php");
-            exit;
-        }
-
-        // Plan hierarchy (you can adjust this order)
-        $planLevels = ['silver' => 1, 'gold' => 2, 'platinum' => 3, 'premium' => 4];
-        $newPlan = strtolower($selectedPlan['plan_name']);
-        $newPlanLevel = $planLevels[$newPlan];
-
-        // Check existing active membership
-        $checkStmt = $conn->prepare("SELECT * FROM memberships WHERE user_id = :user_id AND status = 'active' ORDER BY end_date DESC LIMIT 1");
-        $checkStmt->execute(['user_id' => $userId]);
-        $existing = $checkStmt->fetch(PDO::FETCH_ASSOC);
-
-        $startDate = new DateTime();
-        $endDate = (clone $startDate)->modify('+' . $selectedPlan['duration_days'] . ' days');
-
-        if ($existing) {
-            $existingPlan = strtolower($existing['plan']);
-            $existingPlanLevel = $planLevels[$existingPlan] ?? 0;
-            $existingEndDate = new DateTime($existing['end_date']);
-            $now = new DateTime();
-
-            if ($existingEndDate >= $now) {
-                // Active membership found
-                if ($newPlanLevel <= $existingPlanLevel) {
-                    $_SESSION['error_message'] = "You already have an active {$existing['plan']} membership. Upgrade to a higher plan to proceed.";
-                    header("Location: buy_membership.php");
-                    exit;
-                }
-
-                // Upgrade logic — UPDATE instead of INSERT
-                $updateStmt = $conn->prepare("UPDATE memberships 
-                                              SET plan = :plan, start_date = :start_date, end_date = :end_date, status = 'active' 
-                                              WHERE id = :membership_id");
-                $updateStmt->execute([
-                    'plan' => $selectedPlan['plan_name'],
-                    'start_date' => $startDate->format('Y-m-d'),
-                    'end_date' => $endDate->format('Y-m-d'),
-                    'membership_id' => $existing['id']
-                ]);
-
-                $_SESSION['success_message'] = "Membership upgraded to '{$selectedPlan['plan_name']}' successfully!";
-                header("Location: buy_membership.php");
-                exit;
-            }
-        }
-
-        // No active membership — Insert new one
-        $insertStmt = $conn->prepare("INSERT INTO memberships (user_id, plan, start_date, end_date, status) 
-                                      VALUES (:user_id, :plan, :start_date, :end_date, 'active')");
-        $insertStmt->execute([
-            'user_id' => $userId,
-            'plan' => $selectedPlan['plan_name'],
-            'start_date' => $startDate->format('Y-m-d'),
-            'end_date' => $endDate->format('Y-m-d')
-        ]);
-
-        $_SESSION['success_message'] = "Membership '{$selectedPlan['plan_name']}' bought successfully!";
-        header("Location: buy_membership.php");
-        exit;
-
-    } catch (PDOException $e) {
-        $_SESSION['error_message'] = "Database error: " . $e->getMessage();
-        header("Location: buy_membership.php");
-        exit;
-    }
-} else {
+if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     header("Location: buy_membership.php");
     exit;
 }
-?>
+
+$host = "localhost";
+$dbname = "gym_db";
+$user = "postgres";
+$password = "lakindu";
+
+try {
+    $conn = new PDO("pgsql:host=$host;dbname=$dbname", $user, $password);
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+    // Sanitize and validate inputs
+    $membership_id = filter_input(INPUT_POST, 'membership_id', FILTER_VALIDATE_INT);
+    $card_name = trim($_POST['card_name'] ?? '');
+    $card_number = preg_replace('/\D/', '', $_POST['card_number'] ?? '');
+    $expiry_date = trim($_POST['expiry_date'] ?? '');
+    $cvv = trim($_POST['cvv'] ?? '');
+
+    // Basic validations
+    if (!$membership_id || empty($card_name) || strlen($card_number) !== 16 || !preg_match('/^(0[1-9]|1[0-2])\/\d{2}$/', $expiry_date) || strlen($cvv) !== 3) {
+        $_SESSION['error_message'] = "Invalid payment or membership details.";
+        header("Location: buy_membership.php");
+        exit;
+    }
+
+    // Check membership exists and is active
+    $stmt = $conn->prepare("SELECT * FROM buy_membership WHERE id = :id AND is_active = TRUE");
+    $stmt->execute(['id' => $membership_id]);
+    $membership = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    if (!$membership) {
+        $_SESSION['error_message'] = "Selected membership plan not found.";
+        header("Location: buy_membership.php");
+        exit;
+    }
+
+    // Store the purchase details - Assuming table membership_purchases:
+    // Columns: id (serial), user_id (int), membership_id (int), purchase_date (timestamp), price (numeric), payment_card_name, payment_card_number (hashed or masked), payment_expiry, payment_cvv (don't store CVV in real world!)
+    
+    // WARNING: Never store CVV in real payment systems. Here it's just a demo.
+    
+    // Mask card number for storage - store last 4 digits only
+    $masked_card_number = str_repeat('*', 12) . substr($card_number, -4);
+
+    $stmt = $conn->prepare("INSERT INTO membership_purchases (user_id, membership_id, purchase_date, price, payment_card_name, payment_card_number, payment_expiry) VALUES (:user_id, :membership_id, NOW(), :price, :card_name, :card_number, :expiry)");
+    $stmt->execute([
+        'user_id' => $_SESSION['user_id'],
+        'membership_id' => $membership_id,
+        'price' => $membership['price'],
+        'card_name' => $card_name,
+        'card_number' => $masked_card_number,
+        'expiry' => $expiry_date
+    ]);
+
+    $_SESSION['success_message'] = "Membership purchased successfully! Thank you.";
+    header("Location: buy_membership.php");
+    exit;
+} catch (PDOException $e) {
+    $_SESSION['error_message'] = "Database error: " . $e->getMessage();
+    header("Location: buy_membership.php");
+    exit;
+}

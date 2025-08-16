@@ -1,48 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <!-- Basic meta tags for charset, browser compatibility, and responsive layout -->
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
   <title>GYM Core - About Us</title>
+
+  <!-- Tailwind CSS CDN for utility-first styling -->
   <script src="https://cdn.tailwindcss.com"></script>
 
-  <!-- Font Awesome & AOS -->
+  <!-- Font Awesome for icons & AOS for scroll animations -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
   <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css" />
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 
+  <!-- Tailwind configuration for custom colors and animations -->
   <script>
     tailwind.config = {
       theme: {
         extend: {
           colors: {
-            primary: "#ff6600",
+            primary: "#ff6600", // Custom primary color (orange)
           },
           keyframes: {
-            fadeIn: {
+            fadeIn: { // Custom fadeIn animation
               '0%': { opacity: 0 },
               '100%': { opacity: 1 },
             },
           },
           animation: {
-            fadeIn: "fadeIn 1.5s ease-out",
+            fadeIn: "fadeIn 1.5s ease-out", // Apply fadeIn animation
           },
         },
       },
     };
   </script>
 </head>
+
 <body class="bg-gray-900 text-white font-sans transition-colors duration-300">
 
-  <!-- Navbar -->
+  <!-- Navbar Section -->
   <header class="bg-gray-800 fixed w-full top-0 z-50 shadow">
     <div class="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
+      <!-- Brand Logo -->
       <a href="index.php" class="flex items-center">
         <span class="text-3xl font-bold text-primary">GYM CORE</span>
         <i class="fas fa-dumbbell ml-2 text-white text-xl"></i>
       </a>
 
+      <!-- Desktop Navigation Links -->
       <nav class="hidden md:flex space-x-6 text-sm uppercase tracking-wide">
         <a href="index.php" class="hover:text-primary">Home</a>
         <a href="about.php" class="text-primary">About Us</a>
@@ -50,6 +58,8 @@
         <a href="instructors.php" class="hover:text-primary">Instructors</a>
         <a href="contact.php" class="hover:text-primary">Contact</a>
       </nav>
+
+      <!-- Login/Register Buttons and Mobile Menu Toggle -->
       <div class="flex items-center space-x-3">
         <a href="login.php" class="hidden md:inline-block text-sm px-4 py-2 border border-primary text-primary rounded hover:bg-primary hover:text-white transition">Login</a>
         <a href="register.php" class="hidden md:inline-block text-sm px-4 py-2 bg-primary text-white rounded hover:bg-primary/90 transition">Register</a>
@@ -58,20 +68,24 @@
         </button>
       </div>
     </div>
+
+    <!-- Mobile Menu -->
     <div id="mobile-menu" class="hidden bg-gray-800 md:hidden">
       <nav class="flex flex-col items-center py-4 space-y-3">
+        <!-- Same links as desktop -->
         <a href="index.php" class="hover:text-primary">Home</a>
         <a href="about.php" class="text-primary">About Us</a>
         <a href="supplements.php" class="hover:text-primary">Supplements</a>
         <a href="instructors.php" class="hover:text-primary">Instructors</a>
         <a href="contact.php" class="hover:text-primary">Contact</a>
+        <!-- Login/Register Buttons -->
         <a href="login.php" class="px-4 py-2 border border-primary text-primary rounded w-5/6 text-center">Login</a>
         <a href="register.php" class="px-4 py-2 bg-primary text-white rounded w-5/6 text-center">Register</a>
       </nav>
     </div>
   </header>
 
-  <!-- Hero Section -->
+  <!-- Hero Section with Background Image -->
   <section class="relative h-[60vh] bg-cover bg-center flex items-center justify-center px-6" style="background-image: url('images/About/about us.jpg'); margin-top: 64px;">
     <div class="bg-black/70 p-10 md:p-16 rounded-xl text-center animate-fadeIn">
       <h1 class="text-4xl md:text-6xl font-extrabold">ABOUT <span class="text-primary">US</span></h1>
@@ -89,15 +103,17 @@
     </div>
   </section>
 
-  <!-- Our Mission & Vision -->
+  <!-- Mission & Vision Section -->
   <section class="py-16 bg-gray-800">
     <div class="max-w-6xl mx-auto px-4 grid md:grid-cols-2 gap-10">
+      <!-- Mission -->
       <div data-aos="fade-up">
         <h3 class="text-2xl font-bold text-primary mb-2">Our Mission</h3>
         <p class="text-gray-400">
           To revolutionize the way people train, shop, and stay healthy by providing a seamless, digital-first gym experience.
         </p>
       </div>
+      <!-- Vision -->
       <div data-aos="fade-up" data-aos-delay="200">
         <h3 class="text-2xl font-bold text-primary mb-2">Our Vision</h3>
         <p class="text-gray-400">
@@ -107,63 +123,39 @@
     </div>
   </section>
 
-  <!-- Meet the Team -->
+  <!-- Location Section with Google Map -->
   <section class="py-16 bg-gray-900">
     <div class="max-w-6xl mx-auto px-4 text-center">
-      <h2 class="text-3xl font-bold mb-8 text-white" data-aos="fade-down" data-aos-duration="1000">Meet Our Team</h2>
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-        <div 
-          class="bg-gray-800 p-6 rounded-lg shadow text-center transform transition-transform duration-300 hover:scale-105 cursor-pointer"
-          data-aos="fade-up" data-aos-delay="100" data-aos-duration="800"
-        >
-          <img 
-            src="images/Instructors/instructor1.jpg" 
-            class="rounded-full mx-auto mb-4 transition-transform duration-500 ease-in-out hover:scale-110 hover:shadow-lg hover:shadow-primary/60 cursor-pointer" 
-            alt="Trainer" 
-            loading="lazy"
-          />
-          <h4 class="text-xl font-semibold text-white">Coach Alex</h4>
-          <p class="text-gray-400 text-sm">Head Trainer</p>
-        </div>
-        <div 
-          class="bg-gray-800 p-6 rounded-lg shadow text-center transform transition-transform duration-300 hover:scale-105 cursor-pointer"
-          data-aos="fade-up" data-aos-delay="200" data-aos-duration="800"
-        >
-          <img 
-            src="images/Instructors/instructor2.jpg" 
-            class="rounded-full mx-auto mb-4 transition-transform duration-500 ease-in-out hover:scale-110 hover:shadow-lg hover:shadow-primary/60 cursor-pointer" 
-            alt="Admin" 
-            loading="lazy"
-          />
-          <h4 class="text-xl font-semibold text-white">Sarah Kim</h4>
-          <p class="text-gray-400 text-sm">Admin Coordinator</p>
-        </div>
-        <div 
-          class="bg-gray-800 p-6 rounded-lg shadow text-center transform transition-transform duration-300 hover:scale-105 cursor-pointer"
-          data-aos="fade-up" data-aos-delay="300" data-aos-duration="800"
-        >
-          <img 
-            src="images/Instructors/instructor3.jpg" 
-            class="rounded-full mx-auto mb-4 transition-transform duration-500 ease-in-out hover:scale-110 hover:shadow-lg hover:shadow-primary/60 cursor-pointer" 
-            alt="Nutritionist" 
-            loading="lazy"
-          />
-          <h4 class="text-xl font-semibold text-white">Mike Lee</h4>
-          <p class="text-gray-400 text-sm">Nutrition Expert</p>
-        </div>
+      <h2 class="text-3xl font-bold mb-8 text-white" data-aos="fade-down" data-aos-duration="1000">Find Our Gym Location</h2>
+      <p class="mb-8 text-gray-400 max-w-2xl mx-auto">
+        Visit us at our gym located in the heart of Colombo. Find us easily using the map below.
+      </p>
+      <div data-aos="fade-up" data-aos-duration="1000" class="w-full h-96 rounded-lg overflow-hidden shadow-lg">
+        <!-- Google Maps iframe -->
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3960.888210229349!2d79.97234581531018!3d6.910897695037612!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ae25766c3c983e3%3A0xfe17103d14f7a963!2s124%2FF%2F6%20Nissin%20Residence!5e0!3m2!1sen!2slk!4v1691820689934!5m2!1sen!2slk"
+          width="100%"
+          height="100%"
+          style="border:0;"
+          allowfullscreen=""
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          title="Gym Core Location"
+        ></iframe>
       </div>
     </div>
   </section>
 
-  <!-- Footer -->
+  <!-- Footer Section -->
   <footer class="bg-[#1f1f1f] text-gray-300 pt-16 pb-10 border-t-4 border-primary mt-16">
     <div class="max-w-7xl mx-auto px-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-10 border-b border-gray-700 pb-12">
 
-      <!-- Brand Info -->
+      <!-- Brand Info & Social Links -->
       <div class="pr-4 border-r border-gray-700">
         <h3 class="text-white text-2xl font-extrabold mb-4 tracking-wide">GYM CORE</h3>
         <p class="text-sm leading-relaxed">Your ultimate online fitness hub for training, transformation, and supplements.</p>
         <div class="flex items-center space-x-3 mt-5">
+          <!-- Social Media Buttons -->
           <a href="https://www.facebook.com/share/1DqCn5Ubdz/" target="_blank" class="w-9 h-9 flex items-center justify-center bg-gray-700 hover:bg-blue-600 text-white rounded-full transition">
             <i class="fab fa-facebook-f"></i>
           </a>
@@ -201,35 +193,36 @@
         </ul>
       </div>
 
-      <!-- Newsletter -->
+      <!-- Newsletter Subscription Form -->
       <div class="sm:pl-4">
         <h4 class="text-white font-semibold text-lg mb-4 tracking-wider">Subscribe to Newsletter</h4>
         <p class="text-sm mb-4">Get the latest updates, deals, and fitness tips in your inbox.</p>
         <form action="subscribe.php" method="get" class="flex flex-col space-y-3">
-          <button type="submit"
-            class="bg-primary hover:bg-primary/90 text-white py-2 rounded font-bold transition">
+          <button type="submit" class="bg-primary hover:bg-primary/90 text-white py-2 rounded font-bold transition">
             Subscribe
           </button>
         </form>
       </div>
     </div>
 
-    <!-- Bottom Note with only top border -->
+    <!-- Bottom Note with Copyright -->
     <div class="text-center text-sm text-gray-500 pt-6 border-t-4 border-primary mt-6">
       &copy; <?php echo date("Y"); ?> GYM Core. All rights reserved.
     </div>
   </footer>
 
-  <!-- JS -->
+  <!-- JS Scripts -->
   <script>
+    // Mobile menu toggle
     document.getElementById("menu-toggle").addEventListener("click", () => {
       const menu = document.getElementById("mobile-menu");
       menu.classList.toggle("hidden");
     });
 
+    // Initialize AOS animations
     AOS.init({
-      duration: 1000,
-      once: true,
+      duration: 1000, // Animation duration in ms
+      once: true,     // Animate only once while scrolling
     });
   </script>
 </body>

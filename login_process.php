@@ -1,12 +1,13 @@
 <?php
 session_start();
 
+// Only allow POST requests
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     header("Location: login.php");
     exit;
 }
 
-// DB credentials
+// Database credentials
 $host = "localhost";
 $dbname = "gym_db";
 $user = "postgres";
@@ -40,7 +41,7 @@ try {
     $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
     if ($user && password_verify($passwordInput, $user['password'])) {
-        // Fetch role from user_roles table or default to 'member'
+        // Fetch role from user_roles table, default to 'member'
         $roleStmt = $pdo->prepare("SELECT role FROM user_roles WHERE user_id = :user_id");
         $roleStmt->execute(['user_id' => $user['id']]);
         $roleRow = $roleStmt->fetch(PDO::FETCH_ASSOC);
@@ -52,11 +53,20 @@ try {
         $_SESSION['email'] = $user['email'];
         $_SESSION['role'] = $role;
 
-        // Redirect user based on role
-        if ($role === 'admin') {
-            header("Location: admin_dashboard.php");
-        } else {
-            header("Location: user_dashboard.php");
+        // Redirect based on role
+        switch ($role) {
+            case 'admin':
+                header("Location: admin_dashboard.php");
+                break;
+            case 'trainer':
+                header("Location: trainer_dashboard.php");
+                break;
+            case 'rider':
+                header("Location: rider_dashboard.php"); // <-- Rider dashboard
+                break;
+            default:
+                header("Location: user_dashboard.php");
+                break;
         }
         exit;
     } else {

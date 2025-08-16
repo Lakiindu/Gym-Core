@@ -1,4 +1,6 @@
 <?php
+session_start(); // Start session at the top
+
 // DB Connection
 $host = 'localhost';
 $db = 'gym_db';
@@ -9,26 +11,34 @@ try {
     $pdo = new PDO("pgsql:host=$host;dbname=$db", $user, $pass);
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 } catch (PDOException $e) {
-    die("Database connection failed: " . $e->getMessage());
+    $_SESSION['register_error'] = "Database connection failed.";
+    header("Location: register.php");
+    exit;
 }
 
 // Get form data
-$username = trim($_POST['username']);
-$email = trim($_POST['email']);
-$password = $_POST['password'];
-$confirm_password = $_POST['confirm_password'];
+$username = trim($_POST['username'] ?? '');
+$email = trim($_POST['email'] ?? '');
+$password = $_POST['password'] ?? '';
+$confirm_password = $_POST['confirm_password'] ?? '';
 
 // Validate input
 if (empty($username) || empty($email) || empty($password) || empty($confirm_password)) {
-    die("Please fill in all fields.");
+    $_SESSION['register_error'] = "Please fill in all fields.";
+    header("Location: register.php");
+    exit;
 }
 
 if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-    die("Invalid email format.");
+    $_SESSION['register_error'] = "Invalid email format.";
+    header("Location: register.php");
+    exit;
 }
 
 if ($password !== $confirm_password) {
-    die("Passwords do not match.");
+    $_SESSION['register_error'] = "Passwords do not match.";
+    header("Location: register.php");
+    exit;
 }
 
 // Hash password
@@ -39,7 +49,9 @@ $stmt = $pdo->prepare("SELECT id FROM users WHERE username = :username OR email 
 $stmt->execute(['username' => $username, 'email' => $email]);
 
 if ($stmt->fetch()) {
-    die("Username or email already exists.");
+    $_SESSION['register_error'] = "Username or email already exists.";
+    header("Location: register.php");
+    exit;
 }
 
 // Insert user with role
@@ -64,12 +76,14 @@ try {
 
     $pdo->commit();
 
-    // Redirect
+    // Registration success - redirect to login with success query
     header("Location: login.php?success=1");
     exit;
 
 } catch (Exception $e) {
     $pdo->rollBack();
-    die("Registration failed: " . $e->getMessage());
+    $_SESSION['register_error'] = "Registration failed: " . $e->getMessage();
+    header("Location: register.php");
+    exit;
 }
 ?>

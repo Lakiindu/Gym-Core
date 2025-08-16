@@ -25,6 +25,135 @@
       });
     });
   </script>
+  <style>
+    /* Modal backdrop */
+    #modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.7);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+      overflow-y: auto;
+      padding: 1.5rem;
+    }
+    #modal.show {
+      display: flex;
+    }
+
+    /* Modal box */
+    #modal > div {
+      background: #1f1f1f;
+      border-radius: 1rem;
+      max-width: 900px;
+      width: 100%;
+      max-height: 80vh;
+      display: flex;
+      flex-direction: row;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.7);
+      position: relative;
+    }
+
+    /* Modal image */
+    #modal-image {
+      width: 40%;
+      object-fit: cover;
+      border-top-left-radius: 1rem;
+      border-bottom-left-radius: 1rem;
+      height: auto;
+    }
+
+    /* Modal content */
+    #modal-content {
+      padding: 2rem;
+      flex: 1;
+      color: #fff;
+      overflow-y: auto;
+    }
+
+    /* Modal headings */
+    #modal-title {
+      font-size: 2rem;
+      font-weight: 800;
+      color: #ff6600;
+      margin-bottom: 0.25rem;
+    }
+    #modal-title2 {
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: #b0b0b0;
+      margin-bottom: 1rem;
+    }
+    #modal-desc {
+      font-size: 1rem;
+      line-height: 1.5;
+      color: #ddd;
+    }
+
+    /* Close button */
+    #modal-close {
+      position: absolute;
+      top: 0.75rem;
+      right: 1rem;
+      background: none;
+      border: none;
+      font-size: 2.5rem;
+      color: #ff6600;
+      cursor: pointer;
+      font-weight: 900;
+      transition: color 0.3s ease;
+    }
+    #modal-close:hover {
+      color: #ffa64d;
+    }
+
+    /* Quick View button styling */
+    .quick-view-btn {
+      position: absolute;
+      bottom: 0.75rem;
+      right: 0.75rem;
+      background-color: rgba(0,0,0,0.6);
+      color: white;
+      font-weight: 600;
+      padding: 0.3rem 0.7rem;
+      border-radius: 9999px;
+      font-size: 0.75rem;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      cursor: pointer;
+      user-select: none;
+    }
+    .group:hover .quick-view-btn,
+    .group:focus-within .quick-view-btn {
+      opacity: 1;
+    }
+
+    /* Position relative on cards for button */
+    .instructor-card {
+      position: relative;
+      cursor: pointer;
+    }
+
+    /* Responsive modal */
+    @media (max-width: 768px) {
+      #modal > div {
+        flex-direction: column;
+        max-height: 90vh;
+      }
+      #modal-image {
+        width: 100%;
+        height: 250px;
+        border-radius: 1rem 1rem 0 0;
+      }
+      #modal-content {
+        padding: 1.5rem 1rem 2rem 1rem;
+      }
+    }
+  </style>
 </head>
 <body class="bg-gray-900 text-white font-sans transition-colors duration-300">
 
@@ -60,23 +189,23 @@
   </div>
 </header>
 
-<!-- Hero Section -->
-<section class="pt-32 pb-12 bg-gray-900 text-center" data-aos="fade-in">
-  <div class="max-w-4xl mx-auto px-4">
-    <h1 class="text-4xl md:text-5xl font-bold text-primary mb-4">Meet Our Expert Trainers</h1>
-    <p class="text-gray-300 text-lg">Trained. Certified. Dedicated to your transformation.</p>
-  </div>
-</section>
+  <!-- Hero Section -->
+  <section class="pt-32 pb-16 bg-gradient-to-r from-primary/90 via-transparent to-primary/60 text-center max-w-7xl mx-auto px-4 rounded-b-3xl shadow-lg">
+    <h1 class="text-5xl font-extrabold mb-4 drop-shadow-lg">Meet Our Expert Trainers</h1>
+    <p class="text-gray-200 max-w-xl mx-auto text-lg mb-6">Trained .Trsuted . Certified . Dedicated to your transformation.</p>
+  </section>
 
 <!-- Instructors Grid -->
 <section class="py-16 px-6 bg-gray-900">
   <div class="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
 
     <!-- Instructor Card 1 -->
-    <div class="bg-gray-800 rounded-3xl overflow-hidden shadow-xl hover:shadow-2xl transition-all transform hover:-translate-y-1 group" data-aos="zoom-in">
-      <div class="w-full aspect-w-1 aspect-h-1 overflow-hidden">
+    <div tabindex="0" role="button" class="instructor-card bg-gray-800 rounded-3xl overflow-hidden shadow-xl hover:shadow-2xl transition-all transform hover:-translate-y-1 group relative" data-aos="zoom-in" data-aos-delay="200"
+      data-name="Alex Johnson" data-title="Strength Coach" data-desc="10+ years building champions. Expert in powerlifting & hypertrophy programs." data-image="images/Instructors/instructor1.jpg">
+      <div class="w-full aspect-w-1 aspect-h-1 overflow-hidden relative">
         <img src="images/Instructors/instructor1.jpg" alt="Alex Johnson"
              class="object-cover w-full h-full transition-transform duration-500 ease-in-out transform group-hover:scale-105 group-hover:brightness-110" />
+        <button class="quick-view-btn" aria-label="Quick view Alex Johnson">Quick View</button>
       </div>
       <div class="p-6 text-center">
         <h3 class="text-2xl font-bold text-primary mb-1">Alex Johnson</h3>
@@ -86,10 +215,12 @@
     </div>
 
     <!-- Instructor Card 2 -->
-    <div class="bg-gray-800 rounded-3xl overflow-hidden shadow-xl hover:shadow-2xl transition-all transform hover:-translate-y-1 group" data-aos="zoom-in" data-aos-delay="100">
-      <div class="w-full aspect-w-1 aspect-h-1 overflow-hidden">
-        <img src="images/Instructors/instructor2.jpg" alt="Emily Carter"
+    <div tabindex="0" role="button" class="instructor-card bg-gray-800 rounded-3xl overflow-hidden shadow-xl hover:shadow-2xl transition-all transform hover:-translate-y-1 group relative" data-aos="zoom-in" data-aos-delay="200"
+      data-name="Emily Carter" data-title="Personal Trainer" data-desc="Certified in functional training, yoga & recovery. Holistic health advocate." data-image="images/Instructors/instructor5.jpg">
+      <div class="w-full aspect-w-1 aspect-h-1 overflow-hidden relative">
+        <img src="images/Instructors/instructor5.jpg" alt="Emily Carter"
              class="object-cover w-full h-full transition-transform duration-500 ease-in-out transform group-hover:scale-105 group-hover:brightness-110" />
+        <button class="quick-view-btn" aria-label="Quick view Emily Carter">Quick View</button>
       </div>
       <div class="p-6 text-center">
         <h3 class="text-2xl font-bold text-primary mb-1">Emily Carter</h3>
@@ -99,10 +230,12 @@
     </div>
 
     <!-- Instructor Card 3 -->
-    <div class="bg-gray-800 rounded-3xl overflow-hidden shadow-xl hover:shadow-2xl transition-all transform hover:-translate-y-1 group" data-aos="zoom-in" data-aos-delay="200">
-      <div class="w-full aspect-w-1 aspect-h-1 overflow-hidden">
+    <div tabindex="0" role="button" class="instructor-card bg-gray-800 rounded-3xl overflow-hidden shadow-xl hover:shadow-2xl transition-all transform hover:-translate-y-1 group relative" data-aos="zoom-in" data-aos-delay="200"
+      data-name="Marcus Lee" data-title="HIIT Specialist" data-desc="Expert in HIIT & conditioning. High-energy workouts tailored for fat burn." data-image="images/Instructors/instructor3.jpg">
+      <div class="w-full aspect-w-1 aspect-h-1 overflow-hidden relative">
         <img src="images/Instructors/instructor3.jpg" alt="Marcus Lee"
              class="object-cover w-full h-full transition-transform duration-500 ease-in-out transform group-hover:scale-105 group-hover:brightness-110" />
+        <button class="quick-view-btn" aria-label="Quick view Marcus Lee">Quick View</button>
       </div>
       <div class="p-6 text-center">
         <h3 class="text-2xl font-bold text-primary mb-1">Marcus Lee</h3>
@@ -112,10 +245,12 @@
     </div>
 
      <!-- Instructor Card 4 -->
-    <div class="bg-gray-800 rounded-3xl overflow-hidden shadow-xl hover:shadow-2xl transition-all transform hover:-translate-y-1 group" data-aos="zoom-in" data-aos-delay="200">
-      <div class="w-full aspect-w-1 aspect-h-1 overflow-hidden">
-        <img src="images/instructor2.jpg" alt="Marcus Lee"
+    <div tabindex="0" role="button" class="instructor-card bg-gray-800 rounded-3xl overflow-hidden shadow-xl hover:shadow-2xl transition-all transform hover:-translate-y-1 group relative" data-aos="zoom-in" data-aos-delay="200"
+      data-name="Lakindu Ransika" data-title="HIIT Specialist" data-desc="Expert in HIIT & conditioning. High-energy workouts tailored for fat burn." data-image="images/Instructors/instructor2.jpg">
+      <div class="w-full aspect-w-1 aspect-h-1 overflow-hidden relative">
+        <img src="images/Instructors/instructor2.jpg" alt="Lakindu Ransika"
              class="object-cover w-full h-full transition-transform duration-500 ease-in-out transform group-hover:scale-105 group-hover:brightness-110" />
+        <button class="quick-view-btn" aria-label="Quick view Lakindu Ransika">Quick View</button>
       </div>
       <div class="p-6 text-center">
         <h3 class="text-2xl font-bold text-primary mb-1">Lakindu Ransika</h3>
@@ -126,6 +261,19 @@
 
   </div>
 </section>
+
+<!-- Quick View Modal -->
+<div id="modal" tabindex="-1" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="modal-title" aria-describedby="modal-desc">
+  <div>
+    <button id="modal-close" aria-label="Close modal">&times;</button>
+    <img id="modal-image" src="" alt="" />
+    <div id="modal-content">
+      <h2 id="modal-title"></h2>
+      <p id="modal-title2"></p>
+      <p id="modal-desc"></p>
+    </div>
+  </div>
+</div>
 
 <!-- Footer -->
 <footer class="bg-[#1f1f1f] text-gray-300 pt-16 pb-10 border-t-4 border-primary mt-16">
@@ -195,6 +343,71 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
 <script>
   AOS.init({ duration: 1000, once: true });
+
+  // Quick View Modal JS
+  document.addEventListener("DOMContentLoaded", () => {
+    const modal = document.getElementById("modal");
+    const modalImage = document.getElementById("modal-image");
+    const modalTitle = document.getElementById("modal-title");
+    const modalTitle2 = document.getElementById("modal-title2");
+    const modalDesc = document.getElementById("modal-desc");
+    const closeBtn = document.getElementById("modal-close");
+
+    // Show modal with data from clicked card
+    function showModal(e) {
+      const card = e.currentTarget;
+      const name = card.getAttribute("data-name");
+      const title = card.getAttribute("data-title");
+      const desc = card.getAttribute("data-desc");
+      const image = card.getAttribute("data-image");
+
+      modalImage.src = image;
+      modalImage.alt = name;
+      modalTitle.textContent = name;
+      modalTitle2.textContent = title;
+      modalDesc.textContent = desc;
+
+      modal.classList.add("show");
+      modal.classList.remove("hidden");
+      modal.focus();
+      document.body.style.overflow = "hidden"; // Prevent background scroll
+    }
+
+    // Close modal function
+    function closeModal() {
+      modal.classList.remove("show");
+      modal.classList.add("hidden");
+      document.body.style.overflow = ""; // Restore scroll
+    }
+
+    // Attach click event on all instructor cards
+    const cards = document.querySelectorAll(".instructor-card");
+    cards.forEach(card => {
+      card.addEventListener("click", showModal);
+      card.addEventListener("keypress", (e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          showModal(e);
+        }
+      });
+    });
+
+    closeBtn.addEventListener("click", closeModal);
+
+    // Close modal on outside click
+    modal.addEventListener("click", (e) => {
+      if (e.target === modal) {
+        closeModal();
+      }
+    });
+
+    // Close modal on Escape key press
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && modal.classList.contains("show")) {
+        closeModal();
+      }
+    });
+  });
 </script>
 </body>
 </html>

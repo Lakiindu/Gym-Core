@@ -15,10 +15,10 @@ try {
     die("Database connection failed: " . $e->getMessage());
 }
 
-// Mock user session (Replace this in production with actual session user)
+// Get user ID from session or mock (for dev/testing)
 $user_id = $_SESSION['user_id'] ?? 1;
 
-// Handle item removal
+// Handle item removal from cart
 if (isset($_GET['remove_id'])) {
     $remove_id = (int) $_GET['remove_id'];
     $stmt = $pdo->prepare("DELETE FROM cart WHERE id = :id AND user_id = :user_id");
@@ -28,7 +28,7 @@ if (isset($_GET['remove_id'])) {
     exit;
 }
 
-// Fetch cart items
+// Fetch cart items for the user
 $stmt = $pdo->prepare("
     SELECT 
         cart.id AS cart_id,
@@ -44,7 +44,7 @@ $stmt = $pdo->prepare("
 $stmt->execute(['user_id' => $user_id]);
 $items = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-// Calculate total
+// Calculate total cart value
 $total = array_sum(array_column($items, 'subtotal'));
 ?>
 
@@ -86,8 +86,8 @@ $total = array_sum(array_column($items, 'subtotal'));
     <?php if (isset($_SESSION['message'])): ?>
       <div class="mb-4 p-4 bg-green-600 rounded">
         <?= htmlspecialchars($_SESSION['message']) ?>
-        <?php unset($_SESSION['message']); ?>
       </div>
+      <?php unset($_SESSION['message']); ?>
     <?php endif; ?>
 
     <?php if (count($items) === 0): ?>
@@ -109,7 +109,7 @@ $total = array_sum(array_column($items, 'subtotal'));
             <?php foreach ($items as $item): ?>
               <tr class="border-b border-gray-700 hover:bg-gray-700 transition">
                 <td class="p-4">
-                  <img src="<?= htmlspecialchars($item['image_path']) ?>" alt="Image" class="h-16 w-16 object-cover rounded" />
+                  <img src="<?= htmlspecialchars($item['image_path']) ?>" alt="<?= htmlspecialchars($item['name']) ?>" class="h-16 w-16 object-cover rounded" />
                 </td>
                 <td class="p-4 font-semibold"><?= htmlspecialchars($item['name']) ?></td>
                 <td class="p-4"><?= number_format($item['price'], 2) ?></td>
@@ -135,8 +135,7 @@ $total = array_sum(array_column($items, 'subtotal'));
       <div class="mt-6 text-right">
         <a href="do_payment.php" class="bg-green-600 hover:bg-green-700 px-6 py-3 rounded text-white font-bold shadow-lg inline-block">
           Proceed to Checkout <i class="fas fa-arrow-right ml-2"></i>
-            </a>
-        </button>
+        </a>
       </div>
     <?php endif; ?>
   </main>

@@ -54,28 +54,64 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['supplement_id'], $_PO
     <meta charset="UTF-8">
     <title>Supplements Dashboard</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
-<body class="bg-gray-900 text-white min-h-screen">
-    <header class="bg-gray-800 p-4 flex justify-between">
+<body class="bg-gray-900 text-white min-h-screen flex">
+
+<!-- Sidebar -->
+<aside class="fixed top-0 left-0 h-full w-64 bg-gray-900 bg-opacity-90 shadow-lg z-50 backdrop-blur-md">
+  <div class="px-6 py-5 border-b border-gray-700">
+    <h1 class="text-2xl font-bold text-orange-500 flex items-center">
+      <i class="fas fa-dumbbell mr-2"></i> GYM Core
+    </h1>
+  </div>
+  <nav class="mt-6 px-4 space-y-4">
+    <a href="user_dashboard.php" class="block px-4 py-3 rounded hover:bg-orange-500/20 transition">
+      <i class="fas fa-home mr-3"></i> Dashboard
+    </a>
+    <a href="profile.php" class="block px-4 py-3 rounded hover:bg-orange-500/20 transition">
+      <i class="fas fa-user mr-3"></i> Profile
+    </a>
+    <a href="supplements_dashboard.php" class="block px-4 py-3 rounded bg-orange-500 text-white">
+      <i class="fas fa-capsules mr-3"></i> Supplements
+    </a>
+    <a href="buy_membership.php" class="block px-4 py-3 rounded hover:bg-orange-500/20 transition">
+      <i class="fas fa-id-card mr-3"></i> Memberships
+    </a>
+        <a href="orders_dashboard.php" class="block px-4 py-3 rounded hover:bg-orange-500/20 transition">
+      <i class="fas fa-box-open mr-3"></i> Membership Purchases and Order Details
+    </a>
+    <a href="book_trainer_dashboard.php" class="block px-4 py-3 rounded hover:bg-primary/20">
+    <i class="fas fa-dumbbell mr-3"></i> Trainers
+</a>
+    <a href="logout.php" class="block px-4 py-3 rounded hover:bg-red-600 transition text-red-500 hover:text-white">
+      <i class="fas fa-sign-out-alt mr-3"></i> Logout
+    </a>
+  </nav>
+</aside>
+
+<!-- Main Content -->
+<div class="flex-1 ml-64 p-6">
+    <header class="bg-gray-800 p-4 rounded flex justify-between items-center shadow-lg">
         <h1 class="text-2xl font-bold text-orange-500">GYM Core Supplements</h1>
         <a href="cart.php" class="text-white bg-orange-500 px-4 py-2 rounded hover:bg-orange-600">Cart</a>
     </header>
 
-    <main class="p-6 container mx-auto">
+    <main class="mt-6">
         <?php if (!empty($message)) : ?>
-            <div class="bg-green-600 p-4 rounded mb-4"><?= htmlspecialchars($message) ?></div>
+            <div class="bg-green-600 p-4 rounded mb-4 shadow"><?= htmlspecialchars($message) ?></div>
         <?php endif; ?>
 
         <?php if (!empty($error)) : ?>
-            <div class="bg-red-600 p-4 rounded mb-4"><?= htmlspecialchars($error) ?></div>
+            <div class="bg-red-600 p-4 rounded mb-4 shadow"><?= htmlspecialchars($error) ?></div>
         <?php endif; ?>
 
-        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-6">
             <?php foreach ($supplements as $supp): ?>
-                <div class="bg-gray-800 p-4 rounded shadow flex flex-col">
+                <div class="bg-gray-800 p-4 rounded-lg shadow-lg flex flex-col border border-gray-700 hover:scale-105 transition-transform duration-300">
                     <img src="<?= htmlspecialchars($supp['image_path']) ?>" alt="<?= htmlspecialchars($supp['name']) ?>" class="h-48 w-full object-cover rounded">
-                    <h2 class="mt-3 text-xl font-bold"><?= htmlspecialchars($supp['name']) ?></h2>
-                    <p class="mt-1">Price: <span class="text-orange-400 font-semibold">LKR <?= number_format($supp['price'], 2) ?></span></p>
+                    <h2 class="mt-3 text-xl font-bold text-orange-400"><?= htmlspecialchars($supp['name']) ?></h2>
+                    <p class="mt-1">Price: <span class="text-orange-500 font-semibold">LKR <?= number_format($supp['price'], 2) ?></span></p>
                     <p class="mt-1">Stock: 
                         <?php
                         if ($supp['stock'] == 0) {
@@ -102,7 +138,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['supplement_id'], $_PO
                                 class="w-full p-2 rounded bg-gray-700 border border-gray-600 text-white"
                                 required
                             >
-                            <button type="submit" class="w-full mt-3 bg-orange-500 hover:bg-orange-600 text-white py-2 rounded font-semibold">Add to Cart</button>
+                            <button type="submit" class="w-full mt-3 bg-orange-500 hover:bg-orange-600 text-white py-2 rounded font-semibold shadow">Add to Cart</button>
                         </form>
                     <?php else: ?>
                         <p class="mt-4 text-red-400 font-semibold">Currently unavailable.</p>
@@ -112,8 +148,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['supplement_id'], $_PO
         </div>
     </main>
 
-    <footer class="text-center p-4 text-gray-400 bg-gray-800 mt-auto">
+    <footer class="text-center p-4 text-gray-400 bg-gray-800 mt-8 rounded shadow">
         &copy; <?= date('Y') ?> GYM Core. All rights reserved.
     </footer>
+</div>
+
 </body>
 </html>

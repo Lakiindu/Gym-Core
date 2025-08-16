@@ -15,6 +15,26 @@ try {
     $pdo = new PDO("pgsql:host=$host;dbname=$dbname", $user, $password);
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
+    // Fetch membership purchases with membership plan info
+    $membershipPurchaseStmt = $pdo->prepare("
+        SELECT 
+            mp.id AS purchase_id,
+            mp.purchase_date,
+            mp.price AS purchase_price,
+            mp.payment_card_name,
+            mp.payment_card_number,
+            mp.payment_expiry,
+            bm.plan_name,
+            bm.duration_days,
+            bm.description
+        FROM membership_purchases mp
+        JOIN buy_membership bm ON mp.membership_id = bm.id
+        WHERE mp.user_id = :user_id
+        ORDER BY mp.purchase_date DESC
+    ");
+    $membershipPurchaseStmt->execute(['user_id' => $userId]);
+    $membershipPurchases = $membershipPurchaseStmt->fetchAll(PDO::FETCH_ASSOC);
+
     // Fetch orders
     $orderStmt = $pdo->prepare("SELECT * FROM orders WHERE user_id = :user_id ORDER BY id DESC");
     $orderStmt->execute(['user_id' => $userId]);
@@ -27,12 +47,18 @@ try {
 } catch (PDOException $e) {
     die("DB connection failed: " . $e->getMessage());
 }
+
+// Helper to mask card number except last 4 digits
+function maskCardNumber($cardNumber) {
+    $last4 = substr($cardNumber, -4);
+    return '************' . $last4;
+}
 ?>
 <!DOCTYPE html>
 <html lang="en" class="">
 <head>
   <meta charset="UTF-8" />
-  <title>Orders & Payments - GYM Core</title>
+  <title>Membership Purchases, Orders & Payments - GYM Core</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
@@ -81,12 +107,20 @@ try {
       <a href="profile.php" class="block px-4 py-3 rounded hover:bg-primary/20 transition">
         <i class="fas fa-user mr-3"></i> Profile
       </a>
-      <a href="orders_dashboard.php" class="block px-4 py-3 rounded bg-primary text-white">
-        <i class="fas fa-box-open mr-3"></i> Orders
-      </a>
       <a href="supplements_dashboard.php" class="block px-4 py-3 rounded hover:bg-primary/20 transition">
         <i class="fas fa-capsules mr-3"></i> Supplements
       </a>
+       <a href="buy_membership.php" class="block px-4 py-3 rounded hover:bg-primary/20 transition">
+      <i class="fas fa-id-card mr-3"></i> Memberships
+      </a>
+            <a href="orders_dashboard.php" class="block px-4 py-3 rounded bg-primary text-white">
+        <i class="fas fa-box-open mr-3"></i> Membership Purchases and Order Details
+      </a>
+      <a href="book_trainer_dashboard.php" class="block px-4 py-3 rounded hover:bg-primary/20">
+    <i class="fas fa-dumbbell mr-3"></i> Trainers
+</a>
+
+
       <a href="logout.php" class="block px-4 py-3 rounded hover:bg-red-600 transition text-red-500 hover:text-white">
         <i class="fas fa-sign-out-alt mr-3"></i> Logout
       </a>
@@ -99,7 +133,48 @@ try {
                 backdrop-blur-xl border border-gray-600 rounded-3xl shadow-2xl 
                 w-full max-w-6xl p-10 animate-fadeInUp overflow-auto max-h-[85vh]">
 
-      <h2 class="text-4xl font-bold mb-8 text-center text-primary">Orders & Payments</h2>
+      <h2 class="text-4xl font-bold mb-8 text-center text-primary">Membership Purchases, Orders & Payments</h2>
+
+      <!-- Membership Purchases Section -->
+      <section class="mb-12">
+        <h3 class="text-3xl font-semibold mb-6 text-orange-400">🎫 Membership Purchase History</h3>
+        <div class="glass rounded-xl p-6 shadow-lg overflow-auto max-h-[300px]">
+          <?php if (empty($membershipPurchases)): ?>
+            <p class="text-center text-gray-400 italic">No membership purchases found.</p>
+          <?php else: ?>
+            <table class="min-w-full text-sm text-left border-separate border-spacing-y-2">
+              <thead>
+                <tr class="text-orange-300 font-semibold">
+                  <th class="px-4 py-2">Purchase ID</th>
+                  <th class="px-4 py-2">Plan Name</th>
+                  <th class="px-4 py-2">Description</th>
+                  <th class="px-4 py-2 text-center">Duration (Days)</th>
+                  <th class="px-4 py-2 text-right">Price (LKR)</th>
+                  <th class="px-4 py-2">Purchase Date</th>
+                  <th class="px-4 py-2">Card Name</th>
+                  <th class="px-4 py-2">Card Number</th>
+                  <th class="px-4 py-2">Expiry</th>
+                </tr>
+              </thead>
+              <tbody>
+                <?php foreach ($membershipPurchases as $mp): ?>
+                  <tr class="hover:bg-gray-800 transition rounded">
+                    <td class="px-4 py-2"><?= htmlspecialchars($mp['purchase_id']) ?></td>
+                    <td class="px-4 py-2"><?= htmlspecialchars($mp['plan_name']) ?></td>
+                    <td class="px-4 py-2"><?= htmlspecialchars($mp['description']) ?></td>
+                    <td class="px-4 py-2 text-center"><?= (int)$mp['duration_days'] ?></td>
+                    <td class="px-4 py-2 text-right"><?= number_format($mp['purchase_price'], 2) ?></td>
+                    <td class="px-4 py-2"><?= date("Y-m-d H:i", strtotime($mp['purchase_date'])) ?></td>
+                    <td class="px-4 py-2"><?= htmlspecialchars($mp['payment_card_name']) ?></td>
+                    <td class="px-4 py-2"><?= htmlspecialchars(maskCardNumber($mp['payment_card_number'])) ?></td>
+                    <td class="px-4 py-2"><?= htmlspecialchars($mp['payment_expiry']) ?></td>
+                  </tr>
+                <?php endforeach; ?>
+              </tbody>
+            </table>
+          <?php endif; ?>
+        </div>
+      </section>
 
       <!-- Orders Section -->
       <section class="mb-12">

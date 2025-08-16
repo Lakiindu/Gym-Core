@@ -60,12 +60,20 @@ if (!$user) {
       <a href="profile.php" class="block px-4 py-3 rounded bg-primary text-white">
         <i class="fas fa-user mr-3"></i> Profile
       </a>
-      <a href="orders_dashboard.php" class="block px-4 py-3 rounded hover:bg-primary/20 transition">
-        <i class="fas fa-box-open mr-3"></i> Orders
-      </a>
       <a href="supplements_dashboard.php" class="block px-4 py-3 rounded hover:bg-primary/20 transition">
         <i class="fas fa-capsules mr-3"></i> Supplements
       </a>
+      <a href="buy_membership.php" class="block px-4 py-3 rounded hover:bg-primary/20 transition">
+      <i class="fas fa-id-card mr-3"></i> Memberships
+      </a>
+            <a href="orders_dashboard.php" class="block px-4 py-3 rounded hover:bg-primary/20 transition">
+        <i class="fas fa-box-open mr-3"></i> Membership Purchases and Order Details
+      </a>
+<a href="book_trainer_dashboard.php" class="block px-4 py-3 rounded hover:bg-primary/20">
+    <i class="fas fa-dumbbell mr-3"></i> Trainers
+</a>
+
+
       <a href="logout.php" class="block px-4 py-3 rounded hover:bg-red-600 transition text-red-500 hover:text-white">
         <i class="fas fa-sign-out-alt mr-3"></i> Logout
       </a>
